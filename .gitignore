@@ -1,0 +1,126 @@
+I'll create a Flask website called Basil with the features you requested. Here's the complete implementation:
+
+## Project Structure
+```
+basil-website/
+├── app.py
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── script.js
+│   └── images/
+│       └── uploads/
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── experiences.html
+│   └── gallery.html
+└── uploads/
+```
+
+## 1. Flask Application (app.py)
+
+```python
+from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename
+import os
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['UPLOAD_FOLDER'] = 'static/images/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+
+# Ensure upload directory exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Sample experiences data
+experiences_data = {'graphic_design': [{'title': 'Logo Design Projects','description': 'Created various logos for clients across different industries','years': '2020-2023'},{'title': 'Brand Identity Development','description': 'Developed complete brand identities including color schemes and typography','years': '2021-2023'}],'cyber_security': [{'title': 'Network Security Analysis','description': 'Conducted security audits and vulnerability assessments','years': '2019-2023'},{'title': 'Penetration Testing','description': 'Performed ethical hacking and security testing','years': '2020-2023'}],'photoshop': [{'title': 'Photo Manipulation','description': 'Advanced photo editing and manipulation techniques','years': '2018-2023'},{'title': 'Digital Art Creation','description': 'Created digital artwork and compositions','years': '2019-2023'}]
+}
+
+@app.route('/')
+def index():return render_template('index.html')
+
+@app.route('/experiences')
+def experiences():category = request.args.get('category', 'graphic_design')return render_template('experiences.html', experiences=experiences_data.get(category, []),category=category)
+
+@app.route('/gallery')
+def gallery():# Get list of uploaded imagesimages = []upload_dir = app.config['UPLOAD_FOLDER']if os.path.exists(upload_dir):for filename in os.listdir(upload_dir):if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):images.append(filename)return render_template('gallery.html', images=images)
+
+@app.route('/upload', methods=['POST'])
+def upload_image():if 'image' not in request.files:flash('No file selected')return redirect(url_for('gallery'))file = request.files['image']if file.filename == '':flash('No file selected')return redirect(url_for('gallery'))if file and allowed_file(file.filename):filename = secure_filename(file.filename)file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))flash('Image uploaded successfully!')return redirect(url_for('gallery'))
+
+def allowed_file(filename):return '.' in filename and \filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
+
+@app.route('/toggle_glow', methods=['POST'])
+def toggle_glow():glow_state = request.form.get('glow_enabled')# This would typically be stored in session or databasereturn redirect(request.referrer or url_for('index'))
+
+if __name__ == '__main__':app.run(debug=True)
+```
+
+## 2. Base Template (templates/base.html)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Basil - Portfolio</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body><!-- Blue Communication Bar --><div class="communication-bar"><div class="nav-container"><span class="site-name">BASIL</span><nav class="main-nav"><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('experiences', category='graphic_design') }}">Graphic Design</a><a href="{{ url_for('experiences', category='cyber_security') }}">Cyber Security</a><a href="{{ url_for('experiences', category='photoshop') }}">Photoshop</a><a href="{{ url_for('gallery') }}">Gallery</a></nav><div class="glow-control"><form action="{{ url_for('toggle_glow') }}" method="post" class="glow-form"><label><input type="checkbox" name="glow_enabled" onchange="this.form.submit()">Enable Glow Effect</label></form></div></div></div><main>{% block content %}{% endblock %}</main><script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+```
+
+## 3. CSS Styles (static/css/style.css)
+
+```css
+/* Reset and Base Styles */
+* {margin: 0;padding: 0;box-sizing: border-box;
+}
+
+body {font-family: 'Arial', sans-serif;background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);color: #ffffff;min-height: 100vh;transition: all 0.3s ease;
+}
+
+/* Blue Communication Bar */
+.communication-bar {background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);padding: 1rem 0;position: sticky;top: 0;z-index: 1000;box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.nav-container {max-width: 1200px;margin: 0 auto;display: flex;justify-content: space-between;align-items: center;padding: 0 2rem;
+}
+
+.site-name {font-size: 1.8rem;font-weight: bold;color: white;text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.main-nav {display: flex;gap: 2rem;
+}
+
+.main-nav a {color: white;text-decoration: none;font-weight: 500;padding: 0.5rem 1rem;border-radius: 5px;transition: background-color 0.3s ease;
+}
+
+.main-nav a:hover {background-color: rgba(255, 255, 255, 0.2);
+}
+
+.glow-control {display: flex;align-items: center;
+}
+
+.glow-form label {color: white;display: flex;align-items: center;gap: 0.5rem;cursor: pointer;
+}
+
+/* Main Content */
+main {max-width: 1200px;margin: 2rem auto;padding: 0 2rem;
+}
+
+/* Glow Effect */
+body.glow-enabled {background: linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 100%);
+}
+
+body.glow-enabled .content-card,
+body.glow-enabled .experience-card,
+body.glow-enabled .gallery-item {box-shadow: 0 0 20px rgba(255, 255, 255, 0.1),0 0 40px rgba(255, 255, 255, 0.05),inset 0 0 20px rgba(255, 255, 255, 0.1);border: 1px solid rgba(255, 255, 255, 0.1);background: rgba(0, 0, 0, 0.3);
+}
+
+/* Home Page Styles */
+.hero {text-align: center;padding: 4rem 0;
+}
+
+.hero h1 {font-size: 3.5rem;margin-bottom: 1rem;background: linear-gradient(45deg, #fff, #ccc);-webkit-background-clip
