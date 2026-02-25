@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زَيّاد محمد - العلاج بالحجامة والكاسات والعلاج بالفوط النارية</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg,#fff,#fff,rgba(212,175,55,0.1));
+            margin: 0;
+            padding: 0;
+            color: #333;
+            direction: rtl;
+        }
+        /* gold accent color */
+        :root {
+            --primary-gold: #d4af37;
+            --dark-gold: #b8860b;
+        }
+        header {
+            background: linear-gradient(90deg,var(--primary-gold),#fff);
+            color: #333;
+            padding: 1rem 2rem;
+            text-align: center;
+            animation: slideIn 1s ease-out;
+        }
+        main {
+            padding: 3rem 2rem 6rem; /* extra bottom space */
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+        h1,h2 {
+            margin-top: 0;
+        }
+        h1 {
+            animation: bounce 1.5s infinite alternate;
+        }
+        section {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+        main section:nth-of-type(1) { animation-delay: 0.3s; }
+        main section:nth-of-type(2) { animation-delay: 0.6s; }
+        main section:nth-of-type(3) { animation-delay: 0.9s; }
+        .contact-links a {
+            display: inline-block;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            padding: 0.8rem 1.2rem;
+            background: var(--primary-gold);
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: transform 0.3s, background 0.3s;
+            animation: pulse 2s infinite;
+        }
+        .contact-links a:hover {
+            background: #005a4f;
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--dark-gold);
+            padding: 1rem 0;
+            background: #fff;
+            border-top: 2px solid var(--primary-gold);
+        }
+        .developer-credit {
+            font-size: 0.8rem;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+        .services-list {
+            list-style: none;
+            padding: 0;
+        }
+        .services-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .services-list img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem;
+            border-radius: 4px;
+            object-fit: contain;
+            /* remove rotation for clarity */
+        }
+        .hours {
+            background: #fffbe6;
+            padding: 1rem;
+            border-left: 4px solid var(--primary-gold);
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .hours h2 {
+            color: var(--dark-gold);
+        }
+        @keyframes rotateImg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        /* animations */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            to { transform: scale(1.05); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bgColor {
+            0% { background: #e0f7fa; }
+            100% { background: #ffe0b2; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>زَيّاد محمد</h1>
+        <p>العلاج بالحجامة - الكاسات - العلاج بالفوط النارية</p>
+    </header>
+    <main>
+        <section>
+            <h2>ماذا نقدم؟</h2>
+            <p>أهلاً بك! أنا زَيّاد محمد، مختص بالعلاج بالحجامة والكاسات والعلاج بالفوط النارية. منذ أكثر من عقد أطبق هذه التقنيات بحرفية للحصول على نتائج فورية وطويلة الأمد. عملائي يشعرون بتحسن في الطاقة، النوم، والمزاج بعد الجلسة الأولى.</p>
+            <p>خدمة شاملة، جلسات فردية مع شرح مفصل للحالة قبل وبعد العلاج، وأساليب متابعة لضمان تحسن مستمر.</p>
+            <ul class="services-list">
+                <li>
+                    <img src="img/قال رسول الله ﷺ ان افضل ما تداويتم به الحجامة.jpg" alt="حديث الحجامة">
+                    <strong>الحجامة:</strong> تفريغ الطاقة السلبية وتحسين الدورة الدموية.
+                </li>
+                <li>
+                    <img src="img/فوائد الحجامة.jpg" alt="فوائد الحجامة">
+                    <strong>الكاسات:</strong> تخفيض الالتهابات وتخفيف آلام العضلات.
+                </li>
+                <li>
+                    <!-- صورة محذوفة بناءً على الطلب -->
+                    العلاج فعال لمشاكل الجهاز التنفسي وآلام الظهر، يتم تطبيق الفوط بعناية وترك تأثير حراري لطيف يساعد على تنظيف الرئتين وتحسين التنفس.
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>لماذا تختارنا؟</h2>
+            <p>نستخدم أدوات معقمة وتقنيات آمنة، ونوفر أجواءً مريحة تساعد على الاسترخاء والشفاء. خبرتنا تمتد لسنوات طويلة في هذا المجال، ورضا عملائنا هو أولويتنا.</p>
+            <p>المئات من المرضى شهدوا تحسناً في حالاتهم المزمنة مثل آلام الظهر، الصداع النصفي، واضطرابات التركيز بعد جلسة أو أكثر. نقدم استشارات شخصية في كل خطوة ونشاركك خطة علاجية واضحة.</p>
+            <p>أجواءنا مفعمة بالطاقة الإيجابية، والمكان مزود بتهوية جيدة، وموسيقى هادئة، مع احترام كامل للخصوصية والوقت.</p>
+        </section>
+        <section class="contact-links">
+            <h2>للتواصل</h2>
+            <a href="tel:+201005021453">اتصل الآن</a>
+            <a href="mailto:baselmohamedtaher@gmail.com">أرسل بريدًا إلكترونيًا</a>
+            <a href="https://wa.me/201010928213" target="_blank" rel="noopener">واتساب</a>
+            <a href="https://www.facebook.com/share/199bvUYsZr/" target="_blank" rel="noopener">فيسبوك</a>
+        </section>        <section class="hours">
+            <h2>مواعيد العمل</h2>
+            <p>العيادة مفتوحة طوال أيام الأسبوع من الساعة 10 صباحًا حتى 10 مساءً. احجز موعدك الآن للاستفادة من جلسة مريحة وفعالة.</p>
+        </section>    </main>
+    <footer>
+        &copy; 2026 زَيّاد محمد. جميع الحقوق محفوظة.
+        <div class="developer-credit">Developed by Basel</div>
+    </footer>
+</body>
+</html>
